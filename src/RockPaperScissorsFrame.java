@@ -26,9 +26,13 @@ public class RockPaperScissorsFrame extends JFrame {
 
     JPanel choice;
     JButton rock;
+    ImageIcon rockIcon;
     JButton paper;
+    ImageIcon paperIcon;
     JButton scissors;
+    ImageIcon scissorsIcon;
     JButton quit;
+    ImageIcon quitIcon;
 
     public RockPaperScissorsFrame () {
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -102,28 +106,44 @@ public class RockPaperScissorsFrame extends JFrame {
         choice.setLayout(new GridLayout(2, 2, 10, 10));
         choice.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), BorderFactory.createLineBorder(Color.black)));
 
-        rock = new JButton("Rock");
+        rockIcon =  new ImageIcon("src/rock.png");
+        Image conversion = rockIcon.getImage();
+        Image scaling = conversion.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+        rockIcon = new ImageIcon(scaling);
+        rock = new JButton("Rock", rockIcon);
+        rock.setFocusable(false);
         rock.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 1));
         choice.add(rock);
 
+        paperIcon =  new ImageIcon("src/paper.png");
+        Image change = paperIcon.getImage();
+        Image size = change.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+        paperIcon = new ImageIcon(size);
         paper = new JButton("Paper");
+        paper.setFocusable(false);
         paper.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 2));
         choice.add(paper);
 
+        scissorsIcon =  new ImageIcon("src/scissors.png");
+        Image toImage = scissorsIcon.getImage();
+        Image sizer = toImage.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+        scissorsIcon = new ImageIcon(sizer);
         scissors = new JButton("Scissors");
+        scissors.setFocusable(false);
         scissors.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 3));
         choice.add(scissors);
 
-        Icon quitIcon = new ImageIcon("test.png");
-
-
-        quit = new JButton();
+        quitIcon =  new ImageIcon("src/quit.png");
+        Image convert = quitIcon.getImage();
+        Image scale = convert.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+        quitIcon = new ImageIcon(scale);
+        quit = new JButton("Quit");
         quit.setIcon(quitIcon);
+        quit.setFocusable(false);
+        quit.addActionListener((ActionEvent ae) -> System.exit(0));
 
         //Weird, but this resizes all buttons, but not as squares even though it has the same height and width
         quit.setPreferredSize(new Dimension(70, 70));
-
-        quit.addActionListener((ActionEvent ae) -> System.exit(0));
         choice.add(quit);
     }
 
