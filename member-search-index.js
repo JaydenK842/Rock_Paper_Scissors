@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"<Unnamed>","c":"RockPaperScissorsFrame","l":"resultOfGame()"},{"p":"<Unnamed>","c":"RockPaperScissorsFrame","l":"RockPaperScissorsFrame()","u":"%3Cinit%3E()"},{"p":"<Unnamed>","c":"RockPaperScissorsFrame","l":"statistics()"}];updateSearchResults();

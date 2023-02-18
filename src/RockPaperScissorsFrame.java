@@ -2,9 +2,11 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 
+/**
+ * @author Jayden Knight
+ */
 public class RockPaperScissorsFrame extends JFrame {
     int pCounter = 1, cCounter = 1, tCounter = 1;
     Random rnd = new Random();
@@ -34,7 +36,7 @@ public class RockPaperScissorsFrame extends JFrame {
     JButton quit;
     ImageIcon quitIcon;
 
-    public RockPaperScissorsFrame () {
+    public RockPaperScissorsFrame() {
         Toolkit kit = Toolkit.getDefaultToolkit();
         frame = new JFrame();
         main = new JPanel();
@@ -64,6 +66,9 @@ public class RockPaperScissorsFrame extends JFrame {
         frame.setVisible(true);
     }
 
+    /**
+     *  Creates the statistics panel
+     */
     public void statistics() {
         stats = new JPanel();
 
@@ -89,6 +94,9 @@ public class RockPaperScissorsFrame extends JFrame {
         stats.add(tText);
     }
 
+    /**
+     *  Creates the results panel
+     */
     public void resultOfGame() {
         gameResults = new JPanel();
 
@@ -101,6 +109,9 @@ public class RockPaperScissorsFrame extends JFrame {
         gameResults.add(scroll);
     }
 
+    /**
+     *  Creates the choices panel
+     */
     private void options() {
         choice = new JPanel();
         choice.setLayout(new GridLayout(2, 2, 10, 10));
@@ -147,6 +158,15 @@ public class RockPaperScissorsFrame extends JFrame {
         choice.add(quit);
     }
 
+    /**
+     *
+     * @param player
+     * @param computer
+     * @param tie
+     * @param result
+     *
+     *  Updates the statistics at the top
+     */
     private void updateStats(JTextField player, JTextField computer, JTextField tie, int result) {
         if (result == 1) {
             player.setText(String.valueOf(pCounter));
@@ -160,6 +180,13 @@ public class RockPaperScissorsFrame extends JFrame {
         }
     }
 
+    /**
+     *
+     * @param resultBox
+     * @param userChoice
+     *
+     * Updates the game result in the middle
+     */
     private void updateGameResult(JTextArea resultBox, int userChoice) {
         int computerChoice = rnd.nextInt(3) + 1;
 
