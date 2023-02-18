@@ -1,10 +1,12 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class RockPaperScissorsFrame extends JFrame {
+    int pCounter = 1, cCounter = 1, tCounter = 1;
     Random rnd = new Random();
 
     JFrame frame;
@@ -37,15 +39,15 @@ public class RockPaperScissorsFrame extends JFrame {
         frame.setTitle("Rock Paper Scissors Game");
 
         statistics();
-        main.add(stats);
+        main.add(stats, BorderLayout.NORTH);
 
         resultOfGame();
-        main.add(gameResults, BorderLayout.NORTH);
+        main.add(gameResults, BorderLayout.CENTER);
 
         options();
-        main.add(choice, BorderLayout.CENTER);
+        main.add(choice, BorderLayout.SOUTH);
 
-        frame.add(main, BorderLayout.SOUTH);
+        frame.add(main);
 
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
@@ -61,18 +63,26 @@ public class RockPaperScissorsFrame extends JFrame {
     public void statistics() {
         stats = new JPanel();
 
-        pWText = new JTextField();
-        //pWText.setPreferredSize(new Dimension(10, 10));
         playerWins = new JLabel("Player wins: ");
-
-        cWText = new JTextField();
-        computerWins = new JLabel("Computer wins: ");
-
-        tText = new JTextField();
-        ties = new JLabel("Ties: ");
-
         stats.add(playerWins);
+
+        pWText = new JTextField("0", 5);
+        pWText.setEditable(false);
         stats.add(pWText);
+
+        computerWins = new JLabel("Computer wins: ");
+        stats.add(computerWins);
+
+        cWText = new JTextField("0", 5);
+        cWText.setEditable(false);
+        stats.add(cWText);
+
+        ties = new JLabel("Ties: ");
+        stats.add(ties);
+
+        tText = new JTextField("0", 5);
+        tText.setEditable(false);
+        stats.add(tText);
     }
 
     public void resultOfGame() {
@@ -90,6 +100,7 @@ public class RockPaperScissorsFrame extends JFrame {
     private void options() {
         choice = new JPanel();
         choice.setLayout(new GridLayout(2, 2, 10, 10));
+        choice.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), BorderFactory.createLineBorder(Color.black)));
 
         rock = new JButton("Rock");
         rock.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 1));
@@ -103,13 +114,30 @@ public class RockPaperScissorsFrame extends JFrame {
         scissors.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 3));
         choice.add(scissors);
 
-        quit = new JButton("Quit");
+        Icon quitIcon = new ImageIcon("test.png");
+
+
+        quit = new JButton();
+        quit.setIcon(quitIcon);
+
+        //Weird, but this resizes all buttons, but not as squares even though it has the same height and width
+        quit.setPreferredSize(new Dimension(70, 70));
+
         quit.addActionListener((ActionEvent ae) -> System.exit(0));
         choice.add(quit);
     }
 
     private void updateStats(JTextField player, JTextField computer, JTextField tie, int result) {
-
+        if (result == 1) {
+            player.setText(String.valueOf(pCounter));
+            pCounter++;
+        } else if (result == 2) {
+            computer.setText(String.valueOf(cCounter));
+            cCounter++;
+        } else if (result == 3) {
+            tie.setText(String.valueOf(tCounter));
+            tCounter++;
+        }
     }
 
     private void updateGameResult(JTextArea resultBox, int userChoice) {
@@ -117,25 +145,25 @@ public class RockPaperScissorsFrame extends JFrame {
 
         if (computerChoice == userChoice) {
             resultBox.append("Tie (No One Wins)\n");
-            //updateStats(pWText, cWText, tText, 3);
+            updateStats(pWText, cWText, tText, 3);
         } else if (computerChoice == 1 && userChoice == 2) {
             resultBox.append("Paper covers Rock (Player wins)\n");
-            //updateStats(pWText, cWText, tText, 1);
+            updateStats(pWText, cWText, tText, 1);
         } else if (computerChoice == 1 && userChoice == 3) {
             resultBox.append("Rock breaks Scissors (Computer wins)\n");
-            //updateStats(pWText, cWText, tText, 2);
+            updateStats(pWText, cWText, tText, 2);
         } else if (computerChoice == 2 && userChoice == 1) {
             resultBox.append("Paper covers Rock (Computer wins)\n");
-            //updateStats(pWText, cWText, tText, 2);
+            updateStats(pWText, cWText, tText, 2);
         } else if (computerChoice == 2 && userChoice == 3) {
             resultBox.append("Scissors cuts Paper (Player wins)\n");
-            //updateStats(pWText, cWText, tText, 1);
+            updateStats(pWText, cWText, tText, 1);
         } else if (computerChoice == 3 && userChoice == 1) {
             resultBox.append("Rock breaks Scissors (Player wins)\n");
-            //updateStats(pWText, cWText, tText, 1);
+            updateStats(pWText, cWText, tText, 1);
         } else if (computerChoice == 3 && userChoice == 2) {
             resultBox.append("Scissors cuts Paper (Computer wins)\n");
-            //updateStats(pWText, cWText, tText, 2);
+            updateStats(pWText, cWText, tText, 2);
         } else {
             resultBox.append("Unknown Error\n");
         }
