@@ -106,7 +106,7 @@ public class RockPaperScissorsFrame extends JFrame {
         choice.setLayout(new GridLayout(2, 2, 10, 10));
         choice.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), BorderFactory.createLineBorder(Color.black)));
 
-        rockIcon =  new ImageIcon("src/rock.png");
+        rockIcon =  new ImageIcon("src/jpegRock.jpg");
         Image conversion = rockIcon.getImage();
         Image scaling = conversion.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         rockIcon = new ImageIcon(scaling);
@@ -115,25 +115,25 @@ public class RockPaperScissorsFrame extends JFrame {
         rock.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 1));
         choice.add(rock);
 
-        paperIcon =  new ImageIcon("src/paper.png");
+        paperIcon =  new ImageIcon("src/jpegPaper.jpg");
         Image change = paperIcon.getImage();
         Image size = change.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         paperIcon = new ImageIcon(size);
-        paper = new JButton("Paper");
+        paper = new JButton("Paper", paperIcon);
         paper.setFocusable(false);
         paper.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 2));
         choice.add(paper);
 
-        scissorsIcon =  new ImageIcon("src/scissors.png");
+        scissorsIcon =  new ImageIcon("src/jpegScissors.jpg");
         Image toImage = scissorsIcon.getImage();
         Image sizer = toImage.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         scissorsIcon = new ImageIcon(sizer);
-        scissors = new JButton("Scissors");
+        scissors = new JButton("Scissors", scissorsIcon);
         scissors.setFocusable(false);
         scissors.addActionListener((ActionEvent ae) -> updateGameResult(resultText, 3));
         choice.add(scissors);
 
-        quitIcon =  new ImageIcon("src/quit.png");
+        quitIcon =  new ImageIcon("src/jpegExit.jpg");
         Image convert = quitIcon.getImage();
         Image scale = convert.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         quitIcon = new ImageIcon(scale);
